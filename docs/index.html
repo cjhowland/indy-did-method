@@ -541,7 +541,8 @@ the <a href="#diddoc-assembly-steps" >DIDDoc Assembly Rules</a>) and the <a clas
 <h3 id="didindy-did-namespace-syntax"><a class="toc-anchor" href="#didindy-did-namespace-syntax" >§</a> <code>did:indy</code> DID Namespace Syntax</h3>
 <p>The <code>did:indy</code> DID Namespace component MUST include a primary, human-friendly name of the Indy network instance, MAY include an optional “:” separator and subspace, human-friendly name, and MUST include a trailing “:” separator. The subspace name is used to identify an Indy instance related to the primary instance, such as the primary network’s test or development instance. The ABNF for the namespace component is:</p>
 <pre><code>namespace     = namestring (&quot;:&quot; namestring) &quot;:&quot;
-namestring    = ALPHA *(ALPHA / DIGIT / &quot;_&quot; / &quot;-&quot;)
+namestring    = lowercase *(lowercase / DIGIT / &quot;_&quot; / &quot;-&quot;)
+lowercase     = %x61-7A ; a-z
 </code></pre>
 <p>The namespace is set by the operator of the network. Although that could lead to namespace collisions, our
 <a href="#assumption-number-of-indy-instances" >assumption about the expected number of Indy instances</a> (low 100s at the most) eliminates that as a concern.</p>
