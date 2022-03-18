@@ -6,9 +6,7 @@ Creation of a `did:indy` DID is performed by an authorized entity executing a `N
 
 - Based on the configured authorization rules of the specific Indy ledger, the transaction may have to be signed by others, such as a Trustee or Endorser. If transaction is not authorized, the transaction MUST be rejected and an error returned to the client.
 
-- A `did:indy` DID MUST be self-certifying by having the namespace identifier component of the DID (last element) derived from the initial public key of the DID, as follows:
-
-  - The base58 encoding of the first 16 bytes of the SHA256 of the Verification Method public key (`did = Base58(Truncate_msb(16(SHA256(publicKey))))`)
+- Whether self-certification is validated is determined by the `version` number. The `version` must be set upon creation and cannot be updated. If the `version` is 2, the `did:indy` DID is self-certifying because the namespace identifier component of the DID (last element) is derived from the initial public key of the DID, using the base58 encoding of the first 16 bytes of the SHA256 of the Verification Method public key (`did = Base58(Truncate_msb(16(SHA256(publicKey))))`). If the `version` is 1, validation is performed according to the `did:sov` method, in which the DID must be the first 16 bytes of the Verification Method public key. If the `version` is 0 or no `version` is provided, no validation is performed.
 
 - The Indy ledger MUST verify the relationship between the namespace identifier component of the DID and the initial public key (verkey). If the relationship between the data elements fails verification, the transaction MUST be rejected and an error returned to the client.
 
@@ -39,7 +37,6 @@ Since the assembly validation may change between writing the DID and resolving i
 The following are the steps for assembling a DIDDoc from its inputs.
 
 1. If the `verkey` is `null` the DID has been deactivated, and no DIDDoc is created. Assembly is complete; return a success status.
-    1. *Note: On creation, the operation would have failed on the "self-certifying DID" validation and not reached this point in the process.*
 2. The Indy network instance `namespace`, the [[ref: NYM]] `dest` and the [[ref: NYM]] `verkey` items are merged into a text template to produce a base DIDDoc.
     1. See the template in the [Base DIDDoc Template](#base-diddoc-template) section of this document.
     2. If there is no `diddocContent` item in the [[ref: NYM]], assembly is complete; return the DIDDoc and a success status.
