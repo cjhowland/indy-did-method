@@ -3,10 +3,7 @@
 Early instances of Indy Networks used the `did:sov` DID Method. The following summarizes the differences between that `did:sov` and `did:indy`.
 
 - A `did:indy` DID includes a namespace component that enables resolving a DID to a specific instance of an Indy network (e.g. Sovrin, IDUnion, etc.).
-- `did:indy` DID validation is determined by `version`, as shown below. These restrictions MUST be enforced by the ledger.
-    - 0: no validation
-    - 1: validation that the did is the first 16 bytes of the verification key (validation according to did:sov method)
-    - 2: validation of self-certification; that the did is the first 16 bytes of the SHA256 of the verification key (validation according to the did:indy method)
+- `did:indy` DID validation is determined by NYM transaction `version`, as described in the [DID Creation](#nym-transaction-version) section. These restrictions MUST be enforced by the ledger.
 - Identifiers for Indy ledger objects other than [[ref: NYM]]s are adjusted to contain a namespace component.
 - The specification includes rules for transforming a [[ref: NYM]] into a DIDDoc that meets the DID Core Specification.
     - An optional [[ref: NYM]] data item allows entities to extend the DIDDoc returned from a [[ref: NYM]] in arbitrary ways.
