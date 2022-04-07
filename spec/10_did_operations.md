@@ -22,7 +22,7 @@ On successfully writing the transaction to the Indy distributed ledger a success
 
 The NYM transaction `version` specifies the required level of validation of the relationship between the namespace identifier component of the DID and the intial public key (verkey). This field is optional, but if the NYM transaction `version` is provided, it must be set upon creation and cannot be updated. The accepted values are as follows:
 
-  - 0 or NYM transaction `version` is not set: No validation of namespace identifier and initial verkey binding is performed
+  - 0 or NYM transaction `version` is not set: No validation of namespace identifier and initial verkey binding is performed.
   - 1: Validation is performed according to the `did:sov` method, in which the DID must be the first 16 bytes of the Verification Method public key.
   - 2: Validation is performed according to the `did:indy`, in which the namespace identifier component of the DID (last element) is derived from the initial public key of the DID, using the base58 encoding of the first 16 bytes of the SHA256 of the Verification Method public key (`did = Base58(Truncate_msb(16(SHA256(publicKey))))`). This DID is considered self-certifying.
 
@@ -37,7 +37,7 @@ When using the old Indy SDK convention of using the first 16 bytes of the verkey
 
 #### DIDDoc Assembly and Verification
 
-The DIDDoc returned when a `did:indy` DID is resolved is not directly stored in an Indy ledger document. Instead, the DIDDoc must be assembled from data elements in the Indy `NYM` object based on a series of steps. When a [[ref: NYM]] is created or updated the ledger MUST assemble the DIDDoc (following the steps) and validate the DIDDoc. As well, an Indy DID resolver will receive from the ledger the [[ref: NYM]] from the ledger and the non-validation steps must be followed to assemble the DIDDoc for the resolved DID.
+The DIDDoc returned when a `did:indy` DID is resolved is not directly stored in an Indy ledger document. Instead, the DIDDoc must be assembled from data elements in the Indy `NYM` object based on a series of steps. When a [[ref: NYM]] is created or updated the ledger MUST assemble the DIDDoc (following the steps) and validate the DIDDoc. As well, an Indy DID resolver will receive the [[ref: NYM]] from the ledger and the non-validation steps must be followed to assemble the DIDDoc for the resolved DID.
 
 If the `diddocContent` item contains a `@context` item, the resulting DIDDoc is considered JSON-LD. It is the responsibility of the content creator to ensure that it is valid JSON-LD.
 
