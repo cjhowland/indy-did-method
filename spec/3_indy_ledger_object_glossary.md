@@ -11,9 +11,6 @@ Instances of Hyperledger Indy networks persist different kind of (internal) data
 
 ~ When reading NYM transaction from the ledger, clients transform / extract the NYM data into a DID document. Often the terms "NYM" and "DID" are used synonymously, although a "NYM" is "just" Hyperledger Indy's specific way of storing DIDs into the ledger.
 
-::: todo finalize NYM glossary entry
-finalize
-:::
 
 [[def: ATTRIB]] - **Deprecated**
 
@@ -30,10 +27,6 @@ finalize
 
 ~ SCHEMAs define the list of attribute (names) of issued credentials based on a [[ref: CLAIM_DEF]] (see below).
 
-::: todo finalize SCHEMA glossary entry
-finalize
-:::
-
 
 [[def: CLAIM_DEF]]
 ~ A CLAIM_DEF (short for "claim definition") object contains data required for credential issuance as well as 
@@ -41,9 +34,6 @@ credential validation and can be [read](https://hyperledger-indy.readthedocs.io/
 
 ~ Revokable Verifiable Credentials require CLAIM_DEFs which also reference a [[ref: REV_REG_DEF]] (see below).
 
-::: todo finalize CLAIM_DEF glossary entry
-finalize
-:::
 
 [[def: REV_REG_DEF]]
 
