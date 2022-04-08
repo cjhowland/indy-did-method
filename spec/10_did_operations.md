@@ -198,7 +198,7 @@ The DIDDoc produced by the [[ref: NYM]] and "endpoint" [[ref: ATTRIB]] would be 
 
 Updating a DID using the Indy DID Method occurs when a `NYM` transaction is performed by the [[ref: NYM]]'s controller (the "owner" of the [[ref: NYM]]) using the same identifier (`dest`). The Indy ledger MUST validate the [[ref: NYM]] transaction prior to writing the [[ref: NYM]] to the ledger.
 
-When a [[ref: NYM]] is updated, the identifier (`dest`) for the [[ref: NYM]] does not change, but other values, including the `verkey` and `diddocContent`, may be changed. This means that (as expected) the DID itself does not change, but the DIDDoc returned by the DID may change.
+When a [[ref: NYM]] is updated, the identifier (`dest`) for the [[ref: NYM]] does not change, but other values, including the `verkey` and `diddocContent`, may be changed. This means that (as expected) the DID itself does not change, but the DIDDoc returned by the DID may change. The NYM transaction `version` must not be updated.
 
 The following validation steps are performed prior to the update being written to the ledger:
 
@@ -207,6 +207,8 @@ The following validation steps are performed prior to the update being written t
 - The [[ref: NYM]] transaction requires that the transaction to be written is signed by the DID controller using the existing `verkey`. The ledger MUST verify the DID controller's signature. If the DID controller's signature cannot be validated, the transaction MUST be rejected and an error returned to the client.
 
 - The Indy ledger MUST check that the data in the [[ref: NYM]] produces valid JSON and MUST do a limited DIDDoc validation check prior to writing the [[ref: NYM]] object to the ledger. Details of the assembly and verification are [here](#diddoc-assembly-and-verification). If the DIDDoc validation fails, the transaction MUST be rejected and an error returned to the client.
+
+- The Indy ledger checks that the NYM transaction `version` is not updated. If the `version` is updated, the transaction MUST be rejected and an error returned to the client.
 
 Although the DIDDoc is returned from the DIDDoc assembly and verification process, the DIDDoc is not used further by the ledger.
 
