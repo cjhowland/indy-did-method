@@ -39,7 +39,7 @@ When using the old Indy SDK convention of using the first 16 bytes of the verkey
 
 The DIDDoc returned when a `did:indy` DID is resolved is not directly stored in an Indy ledger document. Instead, the DIDDoc must be assembled from data elements in the Indy `NYM` object based on a series of steps. When a [[ref: NYM]] is created or updated the ledger MUST assemble the DIDDoc (following the steps) and validate the DIDDoc. As well, an Indy DID resolver will receive the [[ref: NYM]] from the ledger and the non-validation steps must be followed to assemble the DIDDoc for the resolved DID.
 
-If the `diddocContent` item contains a `@context` item, the resulting DIDDoc is considered JSON-LD. It is the responsibility of the content creator to ensure that it is valid JSON-LD.
+The `diddocContent` item is stored directly in the ledger state and has a maximum size of 10 KiB (10 x 1024 bytes). If the `diddocContent` item contains a `@context` item, the resulting DIDDoc is considered JSON-LD. It is the responsibility of the content creator to ensure that it is valid JSON-LD.
 
 ##### DIDDoc Validation
 
